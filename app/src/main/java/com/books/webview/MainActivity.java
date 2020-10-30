@@ -5,9 +5,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new myWebViewclient());
-        webView.loadUrl("https://codeflarelimited.com");
+        webView.loadUrl("http://mlearning.epizy.com");
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        webView.loadUrl("https://codeflarelimited.com");
+                        webView.loadUrl("http://mlearning.epizy.com");
                     }
                 },  3000);
             }
@@ -72,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
             webView.loadUrl("file:///android_asset/lost.html");
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            super.onReceivedSslError(view, handler, error);
+            handler.cancel();
         }
 
         @Override
