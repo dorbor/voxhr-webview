@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         webView = findViewById(R.id.web);
         progressBar = findViewById(R.id.progress);
         swipeRefreshLayout = findViewById(R.id.swipe);
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new myWebViewclient());
-        webView.loadUrl("http://mlearning.epizy.com");
+        webView.loadUrl("http://codeflarelimited.com");
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        webView.loadUrl("http://mlearning.epizy.com");
+                        webView.loadUrl("http://codeflarelimited.com");
                     }
                 },  3000);
             }
@@ -59,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getColor(android.R.color.holo_red_dark)
         );
 
-
     }
 
 
     public class myWebViewclient extends WebViewClient{
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
@@ -94,4 +97,17 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
     }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }
