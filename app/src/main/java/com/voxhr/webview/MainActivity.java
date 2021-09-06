@@ -1,4 +1,4 @@
-package com.books.webview;
+package com.voxhr.webview;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new myWebViewclient());
-        webView.loadUrl("http://codeflarelimited.com");
+        webView.loadUrl("http://findofficer.com");
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        webView.loadUrl("http://codeflarelimited.com");
+                        webView.loadUrl("http://findofficer.com");
                     }
                 },  3000);
             }

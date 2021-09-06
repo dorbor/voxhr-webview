@@ -1,4 +1,4 @@
-package com.books.webview;
+package com.voxhr.webview;
 
 import org.junit.Test;
 
